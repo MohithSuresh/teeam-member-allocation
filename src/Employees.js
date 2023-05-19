@@ -1,6 +1,8 @@
 import femaleProfile from "./images/femaleProfile.jpg";
 import maleProfile from "./images/maleProfile.jpg";
 import "./App.css";
+import TeamsDropDown from "./TeamsDropDown";
+import TeamMembers from "./TeamMembers";
 
 const Employees = ({
   employees,
@@ -34,63 +36,20 @@ const Employees = ({
       return "card text-black bg-white mb-3 m-2";
     }
   };
-
   return (
     <>
       <main>
         <div className="container">
-          <div className="row justify-content-center mt-3 mb-3">
-            <div className="col-2">
-              <select
-                className="form-select form-select-lg"
-                value={selectedTeam}
-                onChange={(e) => setSelectedTeam(e.target.value)}
-              >
-                <option value="TeamA">TeamA</option>
-                <option value="TeamB">TeamB</option>
-                <option value="TeamC">TeamC</option>
-                <option value="TeamD">TeamD</option>
-              </select>
-            </div>
-          </div>
-          <div className="row justify-content-center mt-3 mb-3">
-            <div className="col-8">
-              <div className="card-collection">
-                {employees.map((employee) => (
-                  <div
-                    key={employee.id}
-                    className={handleEmployeeCardColor(employee)}
-                    id={employee.id}
-                    style={{ cursor: "pointer" }}
-                    onClick={handleEmployeeCardClick}
-                  >
-                    {employee.gender === "female" ? (
-                      <img
-                        src={femaleProfile}
-                        className="card-img-top"
-                        alt="..."
-                      />
-                    ) : (
-                      <img
-                        src={maleProfile}
-                        className="card-img-top"
-                        alt="..."
-                      />
-                    )}
+          <TeamsDropDown
+            selectedTeam={selectedTeam}
+            setSelectedTeam={setSelectedTeam}
+          />
 
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        Full Name: {employee.fullName}
-                      </h5>
-                      <p className="card-text">
-                        <b>Designation:</b> {employee.designation}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <TeamMembers
+            employees={employees}
+            handleEmployeeCardColor={handleEmployeeCardColor}
+            handleEmployeeCardClick={handleEmployeeCardClick}
+          />
         </div>
       </main>
     </>
