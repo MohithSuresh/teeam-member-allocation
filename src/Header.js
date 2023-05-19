@@ -1,7 +1,20 @@
-const Header = () => {
+const Header = ({ employees, selectedTeam }) => {
+  const handleTeamCount = () => {
+    return employees.filter((employee) => employee.teamName === selectedTeam)
+      .length;
+  };
+
   return (
-    <header>
-      <h1>Header</h1>
+    <header classsName="container">
+      <div
+        className="row justify-content-center mt-3 mb-4"
+        style={{ textAlign: "center" }}
+      >
+        <div className="col-4">
+          <h1>Employee Management</h1>
+          <h3>Team Count: {handleTeamCount()}</h3>
+        </div>
+      </div>
     </header>
   );
 };
