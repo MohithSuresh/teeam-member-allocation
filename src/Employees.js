@@ -58,6 +58,7 @@ const Employees = ({
               <div className="card-collection">
                 {employees.map((employee) => (
                   <div
+                    key={employee.id}
                     className={handleEmployeeCardColor(employee)}
                     id={employee.id}
                     style={{ cursor: "pointer" }}

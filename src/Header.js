@@ -12,7 +12,10 @@ const Header = ({ employees, selectedTeam }) => {
       >
         <div className="col-4">
           <h1>Employee Management</h1>
-          <h3>Team Count: {handleTeamCount()}</h3>
+          <h3>
+            {selectedTeam} has {handleTeamCount()}{" "}
+            {handleTeamCount() === 1 ? "Member" : "Members"}{" "}
+          </h3>
         </div>
       </div>
     </header>

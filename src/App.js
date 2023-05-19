@@ -1,8 +1,12 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Employees from "./Employees";
+import GroupedTeamMembers from "./GroupedTeamMembers";
+import NotFound from "./NotFound";
+import Nav from "./Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
@@ -108,15 +112,37 @@ export default function App() {
   }, [selectedTeam]);
 
   return (
-    <>
+    <Router>
+      <Nav></Nav>
       <Header employees={employees} selectedTeam={selectedTeam}></Header>
-      <Employees
-        employees={employees}
-        setEmployees={setEmployees}
-        selectedTeam={selectedTeam}
-        setSelectedTeam={setSelectedTeam}
-      ></Employees>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Employees
+              employees={employees}
+              setEmployees={setEmployees}
+              selectedTeam={selectedTeam}
+              setSelectedTeam={setSelectedTeam}
+            />
+          }
+        ></Route>
+
+        <Route
+          path="/GroupedTeamMembers"
+          element={
+            <GroupedTeamMembers
+              employees={employees}
+              setEmployees={setEmployees}
+              selectedTeam={selectedTeam}
+              setSelectedTeam={setSelectedTeam}
+            />
+          }
+        ></Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer></Footer>
-    </>
+    </Router>
   );
 }
